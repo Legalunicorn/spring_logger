@@ -1,4 +1,5 @@
 package com.legalunicorn.logger.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 @Entity
@@ -8,14 +9,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
+
     @Column(name="description")
     private String description ;
+
     @Column(name="date_completed")
     private LocalDate dateCompleted;
+
+
     @ManyToOne(
+            fetch = FetchType.LAZY,
             cascade= {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="task_group_id")
+    @JsonIgnore
     private TaskGroup taskGroup;
     //no args constructor
     public Task(){

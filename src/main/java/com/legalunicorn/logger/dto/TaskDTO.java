@@ -10,6 +10,7 @@ public class TaskDTO {
 
     @JsonProperty("date_completed")
     private LocalDate dateCompleted;
+    @JsonProperty("group_id")
     private Integer groupId;
 
 

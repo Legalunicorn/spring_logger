@@ -59,4 +59,8 @@ public class TaskService {
         return taskDao.findByDate(date);
     }
 
+    public List<Task> getTaskByGroupId(int groupId){
+        return taskDao.findByGroupId(groupId);
+    }
+
 }
