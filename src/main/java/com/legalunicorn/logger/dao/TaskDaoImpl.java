@@ -1,0 +1,62 @@
+package com.legalunicorn.logger.dao;
+
+
+import com.legalunicorn.logger.entity.Task;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class TaskDaoImpl implements TaskDao {
+
+    private EntityManager entityManager;
+
+    public TaskDaoImpl(EntityManager entityManager){
+        this.entityManager = entityManager;
+    }
+
+
+    @Override
+    public Task findById(int taskId) {
+        return entityManager.find(Task.class,taskId);
+    }
+
+    @Override
+    public List<Task> findAllOrderByDate() {
+        //query
+        TypedQuery<Task> query = entityManager.createQuery("from Task order by date asc",Task.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Task> findByGroupId(int groupId) {
+        TypedQuery<Task> query = entityManager.createQuery("from Task where task_group_id=:groupId",Task.class);
+        query.setParameter("groupId",groupId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Task> findByDate(String date) {
+        TypedQuery<Task> query = entityManager.createQuery("from Task where date=:myDate",Task.class);
+        query.setParameter("myDate",date);
+        return query.getResultList();
+    }
+
+    @Override
+    public Task save(Task task) {
+
+
+    }
+
+    @Override
+    public Task update(Task task) {
+
+    }
+
+    @Override
+    public Task deleteById(int taskId) {
+
+    }
+}
