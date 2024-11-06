@@ -1,10 +1,14 @@
 package com.legalunicorn.logger.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class TaskDTO {
     //POJO
     private String description;
+
+    @JsonProperty("date_completed")
     private LocalDate dateCompleted;
     private Integer groupId;
 
@@ -32,5 +36,13 @@ public class TaskDTO {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
+    }
+
+    public String toString() {
+        return "TaskDTO{" +
+                "description='" + description + '\'' +
+                ", dateCompleted=" + dateCompleted +
+                ", groupId=" + groupId +
+                '}';
     }
 }

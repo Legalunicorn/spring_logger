@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> findAllOrderByDate() {
         //query
-        TypedQuery<Task> query = entityManager.createQuery("from Task order by date asc",Task.class);
+        TypedQuery<Task> query = entityManager.createQuery("from Task order by dateCompleted asc",Task.class);
         return query.getResultList();
     }
 
@@ -38,8 +39,8 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> findByDate(String date) {
-        TypedQuery<Task> query = entityManager.createQuery("from Task where date=:myDate",Task.class);
+    public List<Task> findByDate(LocalDate date) {
+        TypedQuery<Task> query = entityManager.createQuery("from Task where dateCompleted=:myDate",Task.class);
         query.setParameter("myDate",date);
         return query.getResultList();
     }

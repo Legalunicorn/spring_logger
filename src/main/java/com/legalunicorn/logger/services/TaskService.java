@@ -10,6 +10,9 @@ import com.legalunicorn.logger.exceptions.TaskNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class TaskService {
 
@@ -46,6 +49,14 @@ public class TaskService {
             throw new TaskNotFoundException();
         }
         return task;
+    }
+
+    public List<Task> getAllTaskOrderByDate(){
+        return taskDao.findAllOrderByDate();
+    }
+
+    public List<Task> getTasksByDate(LocalDate date){
+        return taskDao.findByDate(date);
     }
 
 }

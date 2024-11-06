@@ -2,6 +2,7 @@ package com.legalunicorn.logger.dao;
 
 import com.legalunicorn.logger.entity.Task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskDao {
@@ -18,7 +19,7 @@ public interface TaskDao {
     List<Task> findByGroupId(int groupId);
 
     //get a task from a date
-    List<Task> findByDate(String date);
+    List<Task> findByDate(LocalDate date);
 
 
     //======= CREATE ========
