@@ -18,15 +18,13 @@ public class TaskRestController {
 
     @GetMapping("/{taskId}")
     public Task getTask(@PathVariable int taskId){
-        Task task = taskService.getTask(taskId);
-        return task;
+        return taskService.getTask(taskId);
     }
 
     //create endpoints
     @PostMapping("")
     public Task addTask(@RequestBody TaskDTO taskDTO){
-        Task newTask = taskService.createTask(taskDTO);
-        return newTask;
+        return  taskService.createTask(taskDTO);
 
     }
 

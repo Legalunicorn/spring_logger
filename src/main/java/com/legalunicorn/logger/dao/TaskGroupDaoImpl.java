@@ -18,4 +18,9 @@ public class TaskGroupDaoImpl implements TaskGroupDao {
     public TaskGroup findById(int id) {
         return entityManager.find(TaskGroup.class,id);
     }
+
+    @Override
+    public void save(TaskGroup taskGroup) {
+        entityManager.persist(taskGroup);
+    }
 }
