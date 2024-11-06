@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public TaskDaoImpl(EntityManager entityManager){
         this.entityManager = entityManager;
@@ -46,17 +46,23 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Task save(Task task) {
-
+        Task dbTask = entityManager.merge(task);
+        return dbTask;
 
     }
 
     @Override
     public Task update(Task task) {
-
+        entityManager.merge(task);
+        return task;
     }
 
     @Override
     public Task deleteById(int taskId) {
+        Task task = entityManager.find(Task.class,taskId);
+        // remove student and return it
+        entityManager.remove(task);
+        return task;
 
     }
 }

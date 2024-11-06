@@ -3,23 +3,34 @@ package com.legalunicorn.logger.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
-@Table(name="task")
+@Table(name = "task")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    private String description ;
+    @Column(name = "description")
+    private String description;
 
-    private String date_completed;
+    @Column(name = "date_completed")
+    private LocalDate dateCompleted;
 
-    @ManyToOne(cascade= {CascadeType.DETACH,CascadeType.PERSIST,
-            CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name="task_group_id")
+    @ManyToOne(
+
+            cascade = {CascadeType.DETACH, CascadeType.PERSIST,
+                    CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "task_group_id")
     private TaskGroup taskGroup;
+
+    //no args constructor
+    public Task() {
+
+    }
 
     public int getId() {
         return id;
@@ -37,12 +48,12 @@ public class Task {
         this.description = description;
     }
 
-    public String getDate_completed() {
-        return date_completed;
+    public LocalDate getDate_completed() {
+        return dateCompleted;
     }
 
-    public void setDate_completed(String date_completed) {
-        this.date_completed = date_completed;
+    public void setDateCompleted(LocalDate dateCompleted) {
+        this.dateCompleted = dateCompleted;
     }
 
     public TaskGroup getTaskGroup() {

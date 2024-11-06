@@ -3,11 +3,15 @@ package com.legalunicorn.logger.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="task_group")
 public class TaskGroup {
+    /*
+    ========= Columns and Mapping =============
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +24,28 @@ public class TaskGroup {
     @Column(name="color")
     private String color;
 
-    @OneToMany(mappedBy="task",
+    @OneToMany(mappedBy="taskGroup",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
     )
     private List<Task> tasks;
+
+    //No args constructor
+    public TaskGroup(){
+
+    }
+
+
+    //Convenience method(?)
+    public void add(Task task){
+        if (tasks==null){
+            tasks = new ArrayList<>();
+        }
+        tasks.add(task); //Add new task
+    }
+
+    /*
+    ======= Getters and Setters ============
+     */
 
     public List<Task> getTasks() {
         return tasks;
