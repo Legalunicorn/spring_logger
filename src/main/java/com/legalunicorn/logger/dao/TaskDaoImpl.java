@@ -31,9 +31,10 @@ public class TaskDaoImpl implements TaskDao {
         return query.getResultList();
     }
 
-    @Override
+    @Override //SHOULDNT THIS BE A GROUP CONTROLLER??
     public List<Task> findByGroupId(int groupId) {
-        TypedQuery<Task> query = entityManager.createQuery("from Task where task_group_id=:groupId",Task.class);
+//        TypedQuery<Task> query = entityManager.createQuery("from Task where task_group_id=:groupId",Task.class);
+        TypedQuery<Task> query = entityManager.createQuery("select t from Task t JOIN FETCH t.taskGroup tg where tg.id=:groupId",Task.class);
         query.setParameter("groupId",groupId);
         return query.getResultList();
     }

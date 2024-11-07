@@ -26,8 +26,10 @@ public class TaskGroup {
     private String color;
 
     @OneToMany(mappedBy="taskGroup",
+//            fetch=FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
     )
+    @JsonIgnore
     private List<Task> tasks;
 
     //No args constructor

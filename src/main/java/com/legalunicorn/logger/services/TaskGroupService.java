@@ -1,17 +1,27 @@
 package com.legalunicorn.logger.services;
 
 
+import com.legalunicorn.logger.dao.TaskDao;
 import com.legalunicorn.logger.dao.TaskGroupDao;
 import com.legalunicorn.logger.dto.TaskGroupDTO;
+import com.legalunicorn.logger.entity.Task;
 import com.legalunicorn.logger.entity.TaskGroup;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskGroupService {
     private final TaskGroupDao taskGroupDao;
-    public TaskGroupService(TaskGroupDao taskGroupDao){
+    private final TaskDao taskDao;
+    public TaskGroupService(TaskGroupDao taskGroupDao,TaskDao taskDao){
         this.taskGroupDao = taskGroupDao;
+        this.taskDao = taskDao;
+    }
+
+    public List<Task> findTasksByGroupId(int groupId){
+        return taskDao.findByGroupId(groupId);
     }
 
     @Transactional

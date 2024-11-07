@@ -20,20 +20,21 @@ public class TaskRestController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/search")
+    @GetMapping("/date/{date_completed}")
     public List<Task> searchTasksByDate(
-            @RequestParam(value="date_completed",required = false)
-            @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate dateCompleted,
-            @RequestParam(value="group_id",required = false) Integer groupId
+            @PathVariable
+            @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate date_completed
+//            @RequestParam(value="date_completed",required = false)
+//            @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate dateCompleted,
+//            @RequestParam(value="group_id",required = false) Integer groupId
             ){
 
-
-        if (dateCompleted!=null){
-            return taskService.getTasksByDate(dateCompleted);
+        if (date_completed!=null){
+            return taskService.getTasksByDate(date_completed);
         }
-        if (groupId!=null){
-            System.out.println("return by group here");
-        }
+//        if (groupId!=null){
+//            return taskService.getTaskByGroupId(groupId);
+//        }
 
         throw new IllegalArgumentException("Either search task by date or group id");
 

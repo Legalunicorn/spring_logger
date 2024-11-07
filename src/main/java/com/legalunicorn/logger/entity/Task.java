@@ -1,6 +1,7 @@
 package com.legalunicorn.logger.entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 @Entity
 @Table(name="task")
@@ -18,12 +19,14 @@ public class Task {
 
 
     @ManyToOne(
-            fetch = FetchType.LAZY,
+//            fetch = FetchType.LAZY,
             cascade= {CascadeType.DETACH,CascadeType.PERSIST,
                     CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name="task_group_id")
-    @JsonIgnore
+//    @JsonIgnore
     private TaskGroup taskGroup;
+
+
     //no args constructor
     public Task(){
     }
@@ -39,7 +42,7 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-    public LocalDate getDate_completed() {
+    public LocalDate getDateCompleted() {
         return dateCompleted;
     }
     public void setDateCompleted(LocalDate dateCompleted) {
