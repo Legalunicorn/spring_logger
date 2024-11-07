@@ -8,4 +8,8 @@ public interface TaskGroupDao {
 
     void save(TaskGroup taskGroup);
 
+    void update(TaskGroup taskGroup);
+
+    void delete(TaskGroup taskGroup);
+
 }

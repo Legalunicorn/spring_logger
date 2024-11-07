@@ -1,6 +1,7 @@
 package com.legalunicorn.logger.rest;
 
 import com.legalunicorn.logger.dto.TaskGroupDTO;
+import com.legalunicorn.logger.dto.UpdateTaskGroupDTO;
 import com.legalunicorn.logger.entity.Task;
 import com.legalunicorn.logger.entity.TaskGroup;
 import com.legalunicorn.logger.services.TaskGroupService;
@@ -30,6 +31,20 @@ public class TaskGroupRestController {
     @PostMapping("")
     public TaskGroup postTaskGroup(@RequestBody TaskGroupDTO taskGroupDTO){
         return taskGroupService.createTaskGroup(taskGroupDTO);
+    }
+
+    @PatchMapping("/{groupId}")
+    public TaskGroup updateTaskGroup(
+            @PathVariable int groupId,
+            @RequestBody UpdateTaskGroupDTO updateTaskGroupDTO
+            ){
+        updateTaskGroupDTO.setId(groupId);
+        return taskGroupService.update(updateTaskGroupDTO);
+    }
+
+    @DeleteMapping("/{groupId}")
+    public void deleteTaskGroup(@PathVariable int groupId){
+        taskGroupService.delete(groupId);
     }
 
 }

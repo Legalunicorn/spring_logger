@@ -30,6 +30,8 @@ public interface TaskDao {
     //======= UPDATE ========
     Task update(Task task);
 
+    void detachFromGroupById(int groupId);
+
     //======== delete ========
     Task deleteById(int taskId);
 

@@ -4,8 +4,10 @@ package com.legalunicorn.logger.services;
 import com.legalunicorn.logger.dao.TaskDao;
 import com.legalunicorn.logger.dao.TaskGroupDao;
 import com.legalunicorn.logger.dto.TaskGroupDTO;
+import com.legalunicorn.logger.dto.UpdateTaskGroupDTO;
 import com.legalunicorn.logger.entity.Task;
 import com.legalunicorn.logger.entity.TaskGroup;
+import com.legalunicorn.logger.exceptions.TaskGroupNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +42,39 @@ public class TaskGroupService {
         taskGroup.setName(taskGroupDTO.getName());
         //by default, there are no tasks?
         taskGroupDao.save(taskGroup);
-        //the persist method from the Dao will filed in the Id values
+        //the persist method from the Dao will fill in the ID values
         return taskGroup;
+    }
+
+    @Transactional
+    public TaskGroup update(UpdateTaskGroupDTO updateTaskGroupDTO){
+        TaskGroup taskGroup = taskGroupDao.findById(updateTaskGroupDTO.getId());
+        String newName = updateTaskGroupDTO.getName();
+        String newColor = updateTaskGroupDTO.getColor();
+        if (newName!=null){
+            taskGroup.setName(newName);
+        }
+        if (newColor!=null){
+            taskGroup.setColor(newColor);
+        }
+        taskGroupDao.update(taskGroup);
+        return taskGroup;
+    }
+
+    // == DELETE ==
+    @Transactional
+    public void delete(int groupId){
+        //find first
+        TaskGroup deletingGroup = taskGroupDao.findById(groupId);
+        if (deletingGroup==null){
+            throw new TaskGroupNotFoundException();
+        }
+        //task dao update where groupId = x
+        taskDao.detachFromGroupById(groupId);
+        //task group dao to delete
+        taskGroupDao.delete(deletingGroup);
+
+        //
     }
 
 

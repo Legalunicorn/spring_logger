@@ -3,6 +3,7 @@ package com.legalunicorn.logger.dao;
 
 import com.legalunicorn.logger.entity.Task;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -31,12 +32,19 @@ public class TaskDaoImpl implements TaskDao {
         return query.getResultList();
     }
 
-    @Override //SHOULDNT THIS BE A GROUP CONTROLLER??
+    @Override //SHOULDN'T THIS BE A GROUP CONTROLLER??
     public List<Task> findByGroupId(int groupId) {
 //        TypedQuery<Task> query = entityManager.createQuery("from Task where task_group_id=:groupId",Task.class);
         TypedQuery<Task> query = entityManager.createQuery("select t from Task t JOIN FETCH t.taskGroup tg where tg.id=:groupId",Task.class);
         query.setParameter("groupId",groupId);
         return query.getResultList();
+    }
+
+    @Override
+    public void detachFromGroupById(int groupId) {
+        Query query = entityManager.createQuery("UPDATE Task t SET t.taskGroup=NULL WHERE t.taskGroup.id=:groupId ");
+        query.setParameter("groupId",groupId);
+        query.executeUpdate();
     }
 
     @Override
@@ -48,8 +56,7 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Task save(Task task) {
-        Task dbTask = entityManager.merge(task);
-        return dbTask;
+        return entityManager.merge(task);
 
     }
 

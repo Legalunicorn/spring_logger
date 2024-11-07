@@ -55,6 +55,7 @@ public class TaskRestController {
             @PathVariable int taskId,
             @RequestBody UpdateTaskDTO updateTaskDTO)
     {
+        //If no group_id is provided -> we remove the group_id
         updateTaskDTO.setId(taskId);
         return taskService.update(updateTaskDTO);
     }

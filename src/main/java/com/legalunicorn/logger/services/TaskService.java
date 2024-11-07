@@ -84,7 +84,11 @@ public class TaskService {
                 throw new TaskGroupNotFoundException();
             }
             updatedTask.setTaskGroup(tempGroup);
+        } else{
+            updatedTask.setTaskGroup(null); //remove association?
         }
+        //groupId is allowed to be null
+        //hence
 
         //DAO update
         taskDao.update(updatedTask);
@@ -93,5 +97,7 @@ public class TaskService {
         return updatedTask;
 
     }
+
+
 
 }
