@@ -20,6 +20,11 @@ public class TaskGroupService {
         this.taskDao = taskDao;
     }
 
+
+    // ===========  GET =============
+    public TaskGroup findById(int groupId){
+        return taskGroupDao.findById(groupId);
+    }
     public List<Task> findTasksByGroupId(int groupId){
         return taskDao.findByGroupId(groupId);
     }

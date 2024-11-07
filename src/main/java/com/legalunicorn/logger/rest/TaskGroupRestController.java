@@ -17,6 +17,11 @@ public class TaskGroupRestController {
         this.taskGroupService = taskGroupService;
     }
 
+    @GetMapping("/{groupId}")
+    public TaskGroup find(@PathVariable int groupId){
+        return taskGroupService.findById(groupId);
+    }
+
     @GetMapping("/{groupId}/tasks")
     public List<Task> findTasksByGroupId(@PathVariable int groupId){
         return taskGroupService.findTasksByGroupId(groupId);

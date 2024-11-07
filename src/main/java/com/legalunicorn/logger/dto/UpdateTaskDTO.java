@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
-public class TaskDTO {
-    //POJO
-    private String description;
-
+public class UpdateTaskDTO {
+    private int id;
     @JsonProperty("date_completed")
     private LocalDate dateCompleted;
     @JsonProperty("group_id")
-    private Integer groupId;
-
+    private Integer groupId; //nullable
+    private String description;
 
     public String getDescription() {
         return description;
@@ -20,6 +18,14 @@ public class TaskDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDate getDateCompleted() {
@@ -36,13 +42,5 @@ public class TaskDTO {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
-    }
-
-    public String toString() {
-        return "TaskDTO{" +
-                "description='" + description + '\'' +
-                ", dateCompleted=" + dateCompleted +
-                ", groupId=" + groupId +
-                '}';
     }
 }

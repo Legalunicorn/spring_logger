@@ -2,6 +2,7 @@ package com.legalunicorn.logger.rest;
 
 
 import com.legalunicorn.logger.dto.TaskDTO;
+import com.legalunicorn.logger.dto.UpdateTaskDTO;
 import com.legalunicorn.logger.entity.Task;
 import com.legalunicorn.logger.services.TaskService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,18 +25,10 @@ public class TaskRestController {
     public List<Task> searchTasksByDate(
             @PathVariable
             @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate date_completed
-//            @RequestParam(value="date_completed",required = false)
-//            @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate dateCompleted,
-//            @RequestParam(value="group_id",required = false) Integer groupId
             ){
-
         if (date_completed!=null){
             return taskService.getTasksByDate(date_completed);
         }
-//        if (groupId!=null){
-//            return taskService.getTaskByGroupId(groupId);
-//        }
-
         throw new IllegalArgumentException("Either search task by date or group id");
 
     }
@@ -55,6 +48,15 @@ public class TaskRestController {
     public Task addTask(@RequestBody TaskDTO taskDTO){
         return taskService.createTask(taskDTO);
 
+    }
+
+    @PatchMapping("/{taskId}")
+    public Task updateTask(
+            @PathVariable int taskId,
+            @RequestBody UpdateTaskDTO updateTaskDTO)
+    {
+        updateTaskDTO.setId(taskId);
+        return taskService.update(updateTaskDTO);
     }
 
     //ADD tasks
