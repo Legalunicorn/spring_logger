@@ -60,6 +60,11 @@ public class TaskRestController {
         return taskService.update(updateTaskDTO);
     }
 
+    @DeleteMapping("/{taskId}")
+    public void deleteTask(@PathVariable int taskId){
+        taskService.delete(taskId);
+    }
+
     //ADD tasks
 
 }

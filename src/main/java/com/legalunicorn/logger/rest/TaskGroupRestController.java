@@ -5,6 +5,7 @@ import com.legalunicorn.logger.dto.UpdateTaskGroupDTO;
 import com.legalunicorn.logger.entity.Task;
 import com.legalunicorn.logger.entity.TaskGroup;
 import com.legalunicorn.logger.services.TaskGroupService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class TaskGroupRestController {
     }
 
     @PostMapping("")
-    public TaskGroup postTaskGroup(@RequestBody TaskGroupDTO taskGroupDTO){
+    public TaskGroup postTaskGroup(@Valid @RequestBody TaskGroupDTO taskGroupDTO){
         return taskGroupService.createTaskGroup(taskGroupDTO);
     }
 

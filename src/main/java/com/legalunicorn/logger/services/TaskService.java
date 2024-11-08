@@ -89,13 +89,17 @@ public class TaskService {
         }
         //groupId is allowed to be null
         //hence
-
         //DAO update
         taskDao.update(updatedTask);
 
         //return the new task
         return updatedTask;
 
+    }
+
+    @Transactional
+    public void delete(int taskId){
+        taskDao.deleteById(taskId);
     }
 
 

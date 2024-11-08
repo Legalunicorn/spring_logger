@@ -1,11 +1,13 @@
 package com.legalunicorn.logger.dto;
 
 import com.legalunicorn.logger.entity.Task;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
 public class TaskGroupDTO {
 
+    @NotNull
     private String name;
     private String color;
     private List<Task> tasks;
