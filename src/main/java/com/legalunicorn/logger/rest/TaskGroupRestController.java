@@ -29,6 +29,11 @@ public class TaskGroupRestController {
         return taskGroupService.findTasksByGroupId(groupId);
     }
 
+    @GetMapping("")
+    public List<TaskGroup> findAll(){
+        return taskGroupService.findAll();
+    }
+
     @PostMapping("")
     public TaskGroup postTaskGroup(@Valid @RequestBody TaskGroupDTO taskGroupDTO){
         return taskGroupService.createTaskGroup(taskGroupDTO);

@@ -28,14 +28,14 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<Task> findAllOrderByDate() {
         //query
-        TypedQuery<Task> query = entityManager.createQuery("from Task order by dateCompleted asc",Task.class);
+        TypedQuery<Task> query = entityManager.createQuery("from Task order by dateCompleted desc",Task.class);
         return query.getResultList();
     }
 
     @Override //SHOULDN'T THIS BE A GROUP CONTROLLER??
     public List<Task> findByGroupId(int groupId) {
 //        TypedQuery<Task> query = entityManager.createQuery("from Task where task_group_id=:groupId",Task.class);
-        TypedQuery<Task> query = entityManager.createQuery("select t from Task t JOIN FETCH t.taskGroup tg where tg.id=:groupId",Task.class);
+        TypedQuery<Task> query = entityManager.createQuery("select t from Task t JOIN FETCH t.taskGroup tg where tg.id=:groupId order by t.dateCompleted desc",Task.class);
         query.setParameter("groupId",groupId);
         return query.getResultList();
     }

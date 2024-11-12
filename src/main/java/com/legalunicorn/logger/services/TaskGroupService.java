@@ -31,6 +31,10 @@ public class TaskGroupService {
         return taskDao.findByGroupId(groupId);
     }
 
+    public List<TaskGroup> findAll(){
+        return taskGroupDao.findAll();
+    }
+
     @Transactional
     public TaskGroup createTaskGroup(TaskGroupDTO taskGroupDTO){
         //group

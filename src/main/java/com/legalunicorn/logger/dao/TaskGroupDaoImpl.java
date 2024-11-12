@@ -3,7 +3,10 @@ package com.legalunicorn.logger.dao;
 
 import com.legalunicorn.logger.entity.TaskGroup;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskGroupDaoImpl implements TaskGroupDao {
@@ -17,6 +20,12 @@ public class TaskGroupDaoImpl implements TaskGroupDao {
     @Override
     public void delete(TaskGroup taskGroup) {
         entityManager.remove(taskGroup);
+    }
+
+    @Override
+    public List<TaskGroup> findAll() {
+        TypedQuery<TaskGroup> query = entityManager.createQuery("from TaskGroup",TaskGroup.class);
+        return query.getResultList();
     }
 
     @Override

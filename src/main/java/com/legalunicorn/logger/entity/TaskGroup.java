@@ -19,7 +19,7 @@ public class TaskGroup {
     @Column(name="id")
     private int id;
 
-    @Column(name="name")
+    @Column(name="name",unique = true) //annotation is actually pureply informational !
     private String name;
 
     @Column(name="color")

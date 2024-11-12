@@ -2,6 +2,8 @@ package com.legalunicorn.logger.dao;
 
 import com.legalunicorn.logger.entity.TaskGroup;
 
+import java.util.List;
+
 public interface TaskGroupDao {
 
     TaskGroup findById(int id);
@@ -11,5 +13,7 @@ public interface TaskGroupDao {
     void update(TaskGroup taskGroup);
 
     void delete(TaskGroup taskGroup);
+
+    List<TaskGroup> findAll();
 
 }

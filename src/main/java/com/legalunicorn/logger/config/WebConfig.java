@@ -2,16 +2,26 @@ package com.legalunicorn.logger.config;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 @Configuration
-@EnableWebMvc
+//When I added EnableWebMvc -> error formatting data
 public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters){
+
+    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry){
-        registry.addMapping("/**");
+        registry.addMapping("/**")
+                .allowedMethods("GET","POST","PUT","DELETE","PATCH");
+
         /*
         - returnes a cors registration object, which we can use for additional configuration
 
